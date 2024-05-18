@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { MultiStepForm } from '@/components/multi-step-form'
 import { useSignUpFormContext } from '../../../contexts/sign-up-form.context'
 
 export function SignUpFormFirstStep() {
@@ -6,10 +6,8 @@ export function SignUpFormFirstStep() {
 	return (
 		<div>
 			<p>First</p>
-			<Button variant="secondary" disabled>
-				Previous
-			</Button>
-			<Button onClick={() => forwardStep({})}>Next</Button>
+			<MultiStepForm.PreviousStepButton disabled />
+			<MultiStepForm.ForwardStepButton onClick={() => forwardStep({})} />
 		</div>
 	)
 }

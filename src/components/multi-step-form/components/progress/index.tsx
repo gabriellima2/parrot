@@ -1,14 +1,14 @@
 import { Step } from './components/step'
 import { cn } from '@/helpers/cn'
 
-type MultiStepFormProgressProps = {
+type ProgressProps = {
 	step: string
 	completedSteps: string[]
 	steps: { title: string; value: string }[]
 	className?: string
 }
 
-export function MultiStepFormProgress(props: MultiStepFormProgressProps) {
+export function Progress(props: ProgressProps) {
 	const { steps, step, completedSteps, className } = props
 	return (
 		<ul className={cn('flex flex-col gap-6', className)}>
