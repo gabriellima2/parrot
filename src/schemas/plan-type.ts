@@ -1,10 +1,8 @@
 import { z } from 'zod'
-import { PlanTypes } from '@/constants/plan-types'
 
-export const PlanTypeSchema = z.enum(
-	[PlanTypes.Community /*PlanTypes.Enterprise*/],
-	{
-		invalid_type_error: 'O plano selecionado é inválido',
-		required_error: 'Por favor, selecione um plano',
-	}
-)
+export const PlanTypeSchema = z.enum(['community', 'enterprise'], {
+	invalid_type_error: 'O plano selecionado é inválido',
+	required_error: 'Por favor, selecione um plano',
+})
+
+export type PlanTypes = z.infer<typeof PlanTypeSchema>
