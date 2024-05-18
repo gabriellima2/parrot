@@ -1,15 +1,15 @@
 import { Button } from '@/components/ui/button'
 import { useSignUpFormContext } from '../../../contexts/sign-up-form.context'
 
-export function SignUpFormThirdStep() {
-	const { previousStep, forwardStep } = useSignUpFormContext()
+export function SignUpFormFourthStep() {
+	const { previousStep } = useSignUpFormContext()
 	return (
 		<div>
-			<p>Third</p>
+			<p>Fourth</p>
 			<Button variant="secondary" onClick={previousStep}>
 				Previous
 			</Button>
-			<Button onClick={() => forwardStep({})}>Next</Button>
+			<Button>Finish</Button>
 		</div>
 	)
 }

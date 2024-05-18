@@ -5,6 +5,7 @@ import type { SignUpFields } from '../../../schemas/sign-up.schema'
 export type SignUpFormContextValues = {
 	user: SignUpFields
 	step: SignUpSteps
+	completedSteps: SignUpSteps[]
 	forwardStep: (values: Partial<SignUpFields>) => void
 	previousStep: () => void
 }

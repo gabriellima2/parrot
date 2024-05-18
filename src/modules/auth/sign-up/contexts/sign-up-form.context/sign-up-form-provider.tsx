@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type PropsWithChildren } from 'react'
+import { useMemo, useState, type PropsWithChildren } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { SignUpFormContext } from './sign-up-form-context'
@@ -23,14 +23,22 @@ export function SignUpFormProvider(props: SignUpFormProviderProps) {
 	const [user, setUser] = useState<SignUpFields>({ plan })
 	const { replace } = useRouter()
 
+	const completedSteps = useMemo(() => {
+		const steps = Object.keys(FORM_STEPS.SIGN_UP)
+		const index = steps.indexOf(step)
+		if (index === 0) return [FORM_STEPS.SIGN_UP.first.value]
+		return steps.slice(0, index || 0) as SignUpSteps[]
+	}, [step])
+
 	function forwardStep(values: Partial<SignUpFields>) {
-		if (step === FORM_STEPS.SIGN_UP.third) return
+		if (step === FORM_STEPS.SIGN_UP.fourth.value) return
 		// eslint-disable-next-line no-unused-vars
 		const mappedSteps: { [key in SignUpSteps]?: SignUpSteps } = {
-			first: FORM_STEPS.SIGN_UP.second,
-			second: FORM_STEPS.SIGN_UP.third,
+			first: FORM_STEPS.SIGN_UP.second.value,
+			second: FORM_STEPS.SIGN_UP.third.value,
+			third: FORM_STEPS.SIGN_UP.fourth.value,
 		}
-		const nextStep = mappedSteps[step] || FORM_STEPS.SIGN_UP.first
+		const nextStep = mappedSteps[step] || FORM_STEPS.SIGN_UP.first.value
 
 		setStep(nextStep)
 		replace(ROUTES.AUTH.SIGN_UP(plan, nextStep))
@@ -38,13 +46,14 @@ export function SignUpFormProvider(props: SignUpFormProviderProps) {
 	}
 
 	function previousStep() {
-		if (step === FORM_STEPS.SIGN_UP.first) return
+		if (step === FORM_STEPS.SIGN_UP.first.value) return
 		// eslint-disable-next-line no-unused-vars
 		const mappedSteps: { [key in SignUpSteps]?: SignUpSteps } = {
-			second: FORM_STEPS.SIGN_UP.first,
-			third: FORM_STEPS.SIGN_UP.second,
+			second: FORM_STEPS.SIGN_UP.first.value,
+			third: FORM_STEPS.SIGN_UP.second.value,
+			fourth: FORM_STEPS.SIGN_UP.third.value,
 		}
-		const backStep = mappedSteps[step] || FORM_STEPS.SIGN_UP.first
+		const backStep = mappedSteps[step] || FORM_STEPS.SIGN_UP.first.value
 
 		setStep(backStep)
 		replace(ROUTES.AUTH.SIGN_UP(plan, backStep))
@@ -52,7 +61,13 @@ export function SignUpFormProvider(props: SignUpFormProviderProps) {
 
 	return (
 		<SignUpFormContext.Provider
-			value={{ step, forwardStep, previousStep, user }}
+			value={{
+				step,
+				forwardStep,
+				previousStep,
+				completedSteps,
+				user,
+			}}
 		>
 			{children}
 		</SignUpFormContext.Provider>
