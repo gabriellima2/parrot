@@ -1,13 +1,16 @@
 'use client'
 
 import { useState, type PropsWithChildren } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { SignUpFormContext } from './sign-up-form-context'
+
+import { FORM_STEPS } from '@/constants/form-steps'
+import { ROUTES } from '@/constants/routes'
 
 import type { SignUpFields } from '../../schemas/sign-up.schema'
 import type { SignUpSteps } from '@/schemas/sign-up-steps'
 import type { PlanTypes } from '@/schemas/plan-type'
-import { useRouter } from 'next/navigation'
 
 type SignUpFormProviderProps = PropsWithChildren & {
 	initialStep: SignUpSteps
@@ -21,32 +24,36 @@ export function SignUpFormProvider(props: SignUpFormProviderProps) {
 	const { replace } = useRouter()
 
 	function forwardStep(values: Partial<SignUpFields>) {
-		if (step === 'first') {
-			setStep('second')
-			replace(`/auth/sign-up?p=${btoa(plan)}&step=${btoa('second')}`)
+		if (step === FORM_STEPS.SIGN_UP.third) return
+		// eslint-disable-next-line no-unused-vars
+		const mappedSteps: { [key in SignUpSteps]?: SignUpSteps } = {
+			first: FORM_STEPS.SIGN_UP.second,
+			second: FORM_STEPS.SIGN_UP.third,
 		}
-		if (step === 'second') {
-			setStep('third')
-			replace(`/auth/sign-up?p=${btoa(plan)}&step=${btoa('third')}`)
-		}
+		const nextStep = mappedSteps[step] || FORM_STEPS.SIGN_UP.first
+
+		setStep(nextStep)
+		replace(ROUTES.AUTH.SIGN_UP(plan, nextStep))
 		setUser((prevState) => ({ ...prevState, ...values }))
 	}
 
-	function backStep() {
-		if (step === 'second') {
-			setStep('first')
-			replace(`/auth/sign-up?p=${btoa(plan)}&step=${btoa('first')}`)
-			return
+	function previousStep() {
+		if (step === FORM_STEPS.SIGN_UP.first) return
+		// eslint-disable-next-line no-unused-vars
+		const mappedSteps: { [key in SignUpSteps]?: SignUpSteps } = {
+			second: FORM_STEPS.SIGN_UP.first,
+			third: FORM_STEPS.SIGN_UP.second,
 		}
-		if (step === 'third') {
-			setStep('second')
-			replace(`/auth/sign-up?p=${btoa(plan)}&step=${btoa('second')}`)
-			return
-		}
+		const backStep = mappedSteps[step] || FORM_STEPS.SIGN_UP.first
+
+		setStep(backStep)
+		replace(ROUTES.AUTH.SIGN_UP(plan, backStep))
 	}
 
 	return (
-		<SignUpFormContext.Provider value={{ step, forwardStep, backStep, user }}>
+		<SignUpFormContext.Provider
+			value={{ step, forwardStep, previousStep, user }}
+		>
 			{children}
 		</SignUpFormContext.Provider>
 	)

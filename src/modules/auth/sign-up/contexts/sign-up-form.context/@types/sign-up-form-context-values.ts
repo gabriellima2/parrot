@@ -6,5 +6,5 @@ export type SignUpFormContextValues = {
 	user: SignUpFields
 	step: SignUpSteps
 	forwardStep: (values: Partial<SignUpFields>) => void
-	backStep: () => void
+	previousStep: () => void
 }

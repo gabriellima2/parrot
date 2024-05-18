@@ -7,3 +7,5 @@ export const SignUpSearchParamsSchema = z.object({
 	p: PlanTypeSchema,
 	step: SignUpStepsSchema,
 })
+
+export type SignUpSearchParams = z.infer<typeof SignUpSearchParamsSchema>

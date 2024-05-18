@@ -1,10 +1,10 @@
 'use client'
 
 import { SignUpFormProvider } from './contexts/sign-up-form.context'
+import { SignUpForm } from './components/sign-up-form'
 
 import { SignUpSteps } from '@/schemas/sign-up-steps'
 import { PlanTypes } from '@/schemas/plan-type'
-import { SignUpForm } from './components/sign-up-form'
 
 type SignUpProps = {
 	plan: PlanTypes
