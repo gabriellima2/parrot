@@ -1,6 +1,6 @@
 import { MultiStepForm } from '@/components/multi-step-form'
 
-import { useSignUpFormContext } from '../../../contexts/sign-up-form.context'
+import { useSignUpFormContext } from '../contexts/sign-up-form.context'
 
 import { FORM_STEPS } from '@/constants/form-steps'
 import { cn } from '@/helpers/cn'
