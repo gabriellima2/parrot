@@ -34,7 +34,9 @@
   body {
     @apply bg-background text-foreground;
   }
-
+	p, span {
+		@apply text-muted-foreground;
+	}
 	::-moz-selection {
 		@apply bg-primary text-primary-foreground;
 	}

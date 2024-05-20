@@ -5,5 +5,5 @@ type TitleProps = HTMLAttributes<HTMLElement>
 
 export function Title(props: TitleProps) {
 	const { className, ...rest } = props
-	return <h1 className={cn(className)} {...rest} />
+	return <h1 className={cn('text-2xl font-medium', className)} {...rest} />
 }

@@ -8,7 +8,7 @@ export function Root(props: RootProps) {
 	return (
 		<div
 			className={cn(
-				'h-screen lg:grid lg:grid-cols-[0.3fr_1fr] gap-6 p-4 lg:p-6',
+				'h-screen lg:grid lg:grid-cols-[0.3fr_1fr] gap-4 p-4',
 				className
 			)}
 			{...rest}

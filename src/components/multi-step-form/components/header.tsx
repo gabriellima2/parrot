@@ -5,5 +5,5 @@ type HeaderProps = HTMLAttributes<HTMLElement>
 
 export function Header(props: HeaderProps) {
 	const { className, ...rest } = props
-	return <header className={cn(className)} {...rest} />
+	return <header className={cn('flex flex-col gap-1', className)} {...rest} />
 }

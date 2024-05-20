@@ -5,5 +5,10 @@ type FooterProps = HTMLAttributes<HTMLElement>
 
 export function Footer(props: FooterProps) {
 	const { className, ...rest } = props
-	return <footer className={cn(className)} {...rest} />
+	return (
+		<footer
+			className={cn('w-full flex justify-end gap-4 pt-4', className)}
+			{...rest}
+		/>
+	)
 }
