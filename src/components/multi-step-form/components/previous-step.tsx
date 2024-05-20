@@ -1,9 +1,9 @@
 import { Button, ButtonProps } from '@/components/ui/button'
 import { cn } from '@/helpers/cn'
 
-type PreviousStepButtonProps = ButtonProps
+type PreviousStepProps = ButtonProps
 
-export function PreviousStepButton(props: PreviousStepButtonProps) {
+export function PreviousStep(props: PreviousStepProps) {
 	const {
 		variant = 'secondary',
 		children = 'Passo anterior',

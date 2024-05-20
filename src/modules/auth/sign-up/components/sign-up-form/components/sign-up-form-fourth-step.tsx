@@ -4,12 +4,12 @@ import { useSignUpFormContext } from '../../../contexts/sign-up-form.context'
 export function SignUpFormFourthStep() {
 	const { previousStep } = useSignUpFormContext()
 	return (
-		<div>
-			<p>Fourth</p>
-			<MultiStepForm.PreviousStepButton onClick={previousStep} />
-			<MultiStepForm.ForwardStepButton hasArrowIcon={false}>
+		<MultiStepForm.Root>
+			<MultiStepForm.Title>Fourth</MultiStepForm.Title>
+			<MultiStepForm.PreviousStep onClick={previousStep} />
+			<MultiStepForm.ForwardStep hasArrowIcon={false}>
 				Finalizar
-			</MultiStepForm.ForwardStepButton>
-		</div>
+			</MultiStepForm.ForwardStep>
+		</MultiStepForm.Root>
 	)
 }
