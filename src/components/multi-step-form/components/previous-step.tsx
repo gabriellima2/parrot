@@ -15,7 +15,7 @@ export function PreviousStep(props: PreviousStepProps) {
 			type="button"
 			{...rest}
 			variant={variant}
-			className={cn('sm:max-w-[165px]', className)}
+			className={cn('flex-1 sm:flex-auto sm:max-w-[165px]', className)}
 		>
 			{children}
 		</Button>

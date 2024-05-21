@@ -1,14 +1,19 @@
 import { ArrowRight } from 'lucide-react'
 
 import { Button, type ButtonProps } from '@/components/ui/button'
+import { LoadingIndicator } from '@/components/loading-indicator'
+
 import { cn } from '@/helpers/cn'
 
 type ForwardStepProps = ButtonProps & {
 	hasArrowIcon?: boolean
+	isLoading?: boolean
 }
 
 export function ForwardStep(props: ForwardStepProps) {
 	const {
+		isLoading,
+		disabled,
 		variant = 'default',
 		children = 'Passo seguinte',
 		hasArrowIcon = true,
@@ -19,11 +24,17 @@ export function ForwardStep(props: ForwardStepProps) {
 		<Button
 			type="button"
 			{...rest}
+			disabled={isLoading || disabled}
 			variant={variant}
-			className={cn('sm:max-w-[165px]', className)}
+			className={cn('flex-1 sm:flex-auto sm:max-w-[165px]', className)}
 		>
-			{children}
-			{hasArrowIcon && <ArrowRight className="ml-2" />}
+			{isLoading && !hasArrowIcon ? (
+				<LoadingIndicator className="ml-2" />
+			) : (
+				children
+			)}
+			{!isLoading && hasArrowIcon && <ArrowRight className="ml-2" />}
+			{isLoading && hasArrowIcon && <LoadingIndicator className="ml-2" />}
 		</Button>
 	)
 }

@@ -10,7 +10,10 @@ import { Field } from '@/components/field'
 import { useSignUpFormContext } from '../../../contexts/sign-up-form.context'
 
 import { cnpjMask } from '@/helpers/masks'
-import { SignUpFields, SignUpSchema } from '../../../schemas/sign-up.schema'
+import {
+	SignUpSchema,
+	type SignUpFields,
+} from '../../../schemas/sign-up.schema'
 
 export function SignUpFormFirstStep() {
 	const { forwardStep } = useSignUpFormContext()
@@ -27,7 +30,7 @@ export function SignUpFormFirstStep() {
 				</MultiStepForm.Description>
 			</MultiStepForm.Header>
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(console.log)}>
+				<form onSubmit={form.handleSubmit(forwardStep)}>
 					<MultiStepForm.Grid.Root>
 						<MultiStepForm.Grid.Item className="sm:col-span-2">
 							<FormField
@@ -39,7 +42,7 @@ export function SignUpFormFirstStep() {
 										<FormControl>
 											<Input
 												id={field.name}
-												placeholder="Ex: Vitorino Carmanin Comércio LTDA"
+												placeholder="Ex: Lopes Teodoro Empreendimentos EPP"
 												{...field}
 											/>
 										</FormControl>
@@ -48,7 +51,7 @@ export function SignUpFormFirstStep() {
 								)}
 							/>
 						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="sm:col-span-2 md:col-span-1">
+						<MultiStepForm.Grid.Item className="sm:col-span-2">
 							<FormField
 								control={form.control}
 								name="business_name"
@@ -60,7 +63,7 @@ export function SignUpFormFirstStep() {
 										<FormControl>
 											<Input
 												id={field.name}
-												placeholder="Ex: Comércio Vitorino"
+												placeholder="Ex: Empreendimentos Lopes"
 												{...field}
 											/>
 										</FormControl>
@@ -89,7 +92,7 @@ export function SignUpFormFirstStep() {
 								)}
 							/>
 						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="sm:col-span-2">
+						<MultiStepForm.Grid.Item className="sm:col-span-2 md:col-span-1">
 							<FormField
 								control={form.control}
 								name="state_registration"
@@ -138,10 +141,88 @@ export function SignUpFormFirstStep() {
 								)}
 							/>
 						</MultiStepForm.Grid.Item>
+						<MultiStepForm.Grid.Item className="sm:col-span-2">
+							<FormField
+								control={form.control}
+								name="phone"
+								render={({ field }) => (
+									<Field.Root>
+										<Field.Label htmlFor={field.name}>Telefone</Field.Label>
+										<FormControl>
+											<Input
+												id={field.name}
+												placeholder="Ex: (13) 3626-7236"
+												{...field}
+											/>
+										</FormControl>
+										<Field.Message />
+									</Field.Root>
+								)}
+							/>
+						</MultiStepForm.Grid.Item>
+						<MultiStepForm.Grid.Item className="sm:col-span-2">
+							<FormField
+								control={form.control}
+								name="cell_phone"
+								render={({ field }) => (
+									<Field.Root>
+										<Field.Label htmlFor={field.name}>
+											Celular (Whatsapp)
+										</Field.Label>
+										<FormControl>
+											<Input
+												id={field.name}
+												placeholder="Ex: (16) 99913-7752"
+												{...field}
+											/>
+										</FormControl>
+										<Field.Message />
+									</Field.Root>
+								)}
+							/>
+						</MultiStepForm.Grid.Item>
+						<MultiStepForm.Grid.Item>
+							<FormField
+								control={form.control}
+								name="email"
+								render={({ field }) => (
+									<Field.Root>
+										<Field.Label htmlFor={field.name}>Email</Field.Label>
+										<FormControl>
+											<Input
+												id={field.name}
+												placeholder="Ex: empreendimentos.lopes@geradornv.com.br"
+												{...field}
+											/>
+										</FormControl>
+										<Field.Message />
+									</Field.Root>
+								)}
+							/>
+						</MultiStepForm.Grid.Item>
+						<MultiStepForm.Grid.Item>
+							<FormField
+								control={form.control}
+								name="website"
+								render={({ field }) => (
+									<Field.Root>
+										<Field.Label htmlFor={field.name}>Site</Field.Label>
+										<FormControl>
+											<Input
+												id={field.name}
+												placeholder="Ex: www.empreendimentoslopes.com.br"
+												{...field}
+											/>
+										</FormControl>
+										<Field.Message />
+									</Field.Root>
+								)}
+							/>
+						</MultiStepForm.Grid.Item>
 					</MultiStepForm.Grid.Root>
 					<MultiStepForm.Footer>
 						<MultiStepForm.PreviousStep disabled />
-						<MultiStepForm.ForwardStep onClick={() => forwardStep({})} />
+						<MultiStepForm.ForwardStep type="submit" />
 					</MultiStepForm.Footer>
 				</form>
 			</Form>
