@@ -20,7 +20,7 @@ export function ForwardStep(props: ForwardStepProps) {
 			type="button"
 			{...rest}
 			variant={variant}
-			className={cn('max-w-[165px]', className)}
+			className={cn('sm:max-w-[165px]', className)}
 		>
 			{children}
 			{hasArrowIcon && <ArrowRight className="ml-2" />}

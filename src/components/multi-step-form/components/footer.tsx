@@ -7,7 +7,7 @@ export function Footer(props: FooterProps) {
 	const { className, ...rest } = props
 	return (
 		<footer
-			className={cn('w-full flex justify-end gap-4 pt-4', className)}
+			className={cn('w-full flex justify-end gap-4 pt-8 pb-4', className)}
 			{...rest}
 		/>
 	)
