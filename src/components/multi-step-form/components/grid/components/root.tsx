@@ -5,5 +5,5 @@ type RootProps = HTMLAttributes<HTMLElement>
 
 export function Root(props: RootProps) {
 	const { className, ...rest } = props
-	return <div className={cn('grid grid-cols-4', className)} {...rest} />
+	return <div className={cn('grid grid-cols-4 gap-4', className)} {...rest} />
 }

@@ -17,6 +17,7 @@ export function ForwardStep(props: ForwardStepProps) {
 	} = props
 	return (
 		<Button
+			type="button"
 			{...rest}
 			variant={variant}
 			className={cn('max-w-[165px]', className)}

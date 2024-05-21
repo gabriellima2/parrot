@@ -3,10 +3,13 @@ import * as React from 'react'
 import { cn } from '@/helpers/cn'
 
 export interface InputProps
-	extends React.InputHTMLAttributes<HTMLInputElement> {}
+	extends React.InputHTMLAttributes<HTMLInputElement> {
+	// eslint-disable-next-line no-unused-vars
+	mask?: (value: string) => string
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-	({ className, type, ...props }, ref) => {
+	({ className, type, onChange, mask, ...props }, ref) => {
 		return (
 			<input
 				type={type}
@@ -15,6 +18,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 					className
 				)}
 				ref={ref}
+				onChange={(e) => {
+					if (!onChange) return
+					if (mask)
+						return onChange({
+							...e,
+							target: { ...e.target, value: mask(e.target.value) },
+						})
+					onChange(e)
+				}}
 				{...props}
 			/>
 		)
