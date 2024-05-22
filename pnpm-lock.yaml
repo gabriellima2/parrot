@@ -32,6 +32,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      cpf-cnpj-validator:
+        specifier: ^1.0.3
+        version: 1.0.3
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
@@ -139,6 +142,27 @@ packages:
 
   '@floating-ui/utils@0.2.2':
     resolution: {integrity: sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw==}
+
+  '@hapi/address@4.1.0':
+    resolution: {integrity: sha512-SkszZf13HVgGmChdHo/PxchnSaCJ6cetVqLzyciudzZRT0jcOouIF/Q93mgjw8cce+D+4F4C1Z/WrfFN+O3VHQ==}
+    deprecated: Moved to 'npm install @sideway/address'
+
+  '@hapi/formula@2.0.0':
+    resolution: {integrity: sha512-V87P8fv7PI0LH7LiVi8Lkf3x+KCO7pQozXRssAHNXXL9L1K+uyu4XypLXwxqVDKgyQai6qj3/KteNlrqDx4W5A==}
+    deprecated: Moved to 'npm install @sideway/formula'
+
+  '@hapi/hoek@9.3.0':
+    resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
+
+  '@hapi/joi@17.1.1':
+    resolution: {integrity: sha512-p4DKeZAoeZW4g3u7ZeRo+vCDuSDgSvtsB/NpfjXEHTUjSeINAi/RrVOWiVQ1isaoLzMvFEhe8n5065mQq1AdQg==}
+    deprecated: Switch to 'npm install joi'
+
+  '@hapi/pinpoint@2.0.1':
+    resolution: {integrity: sha512-EKQmr16tM8s16vTT3cA5L0kZZcTMU5DUOZTuvpnY738m+jyP3JIUj+Mm1xc1rsLkGBQ/gVnfKYPwOmPg1tUR4Q==}
+
+  '@hapi/topo@5.1.0':
+    resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
 
   '@hookform/resolvers@3.4.0':
     resolution: {integrity: sha512-+oAqK3okmoEDnvUkJ3N/mvNMeeMv5Apgy1jkoRmlaaAF4vBgcJs9tHvtXU7VE4DvPosvAUUkPOaNFunzt1dbgA==}
@@ -747,6 +771,9 @@ packages:
   cookie@0.5.0:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
+
+  cpf-cnpj-validator@1.0.3:
+    resolution: {integrity: sha512-Slh7iv+sf2FhP9xFRMExuaDF7ndERVzmjBZHqwWG+GqHSqPmEggvLuKUUFJZxb+G804rjqRnnu5eCkbeChqM/Q==}
 
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
@@ -2052,6 +2079,28 @@ snapshots:
 
   '@floating-ui/utils@0.2.2': {}
 
+  '@hapi/address@4.1.0':
+    dependencies:
+      '@hapi/hoek': 9.3.0
+
+  '@hapi/formula@2.0.0': {}
+
+  '@hapi/hoek@9.3.0': {}
+
+  '@hapi/joi@17.1.1':
+    dependencies:
+      '@hapi/address': 4.1.0
+      '@hapi/formula': 2.0.0
+      '@hapi/hoek': 9.3.0
+      '@hapi/pinpoint': 2.0.1
+      '@hapi/topo': 5.1.0
+
+  '@hapi/pinpoint@2.0.1': {}
+
+  '@hapi/topo@5.1.0':
+    dependencies:
+      '@hapi/hoek': 9.3.0
+
   '@hookform/resolvers@3.4.0(react-hook-form@7.51.4(react@18.3.1))':
     dependencies:
       react-hook-form: 7.51.4(react@18.3.1)
@@ -2678,6 +2727,10 @@ snapshots:
   concat-map@0.0.1: {}
 
   cookie@0.5.0: {}
+
+  cpf-cnpj-validator@1.0.3:
+    dependencies:
+      '@hapi/joi': 17.1.1
 
   cross-spawn@7.0.3:
     dependencies:

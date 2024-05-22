@@ -1,17 +1,184 @@
 import { z } from 'zod'
+import { isValid } from 'date-fns'
+import { cnpj } from 'cpf-cnpj-validator'
+
+import { VALIDATION_MESSAGES } from '@/constants/validation-messages'
+import { FIELD_LABELS } from '../constants/field-labels'
+
 import { PlanTypeSchema } from '@/schemas/plan-type'
 
-export const SignUpSchema = z.object({
-	name: z.string(),
-	business_name: z.string(),
-	cnpj: z.string(),
-	state_registration: z.string().optional(),
-	opening_date: z.string(),
-	phone: z.string().optional(),
-	cell_phone: z.string(),
-	website: z.string().url().optional(),
-	email: z.string().email(),
-	plan: PlanTypeSchema,
+const SignUpFirstStepSchema = z.object({
+	name: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.name
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.FIRST_STEP.name
+			),
+		})
+		.trim()
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(FIELD_LABELS.FIRST_STEP.name),
+		})
+		.max(255, {
+			message: VALIDATION_MESSAGES.MAX_LENGTH(
+				FIELD_LABELS.FIRST_STEP.name,
+				255
+			),
+		})
+		.refine((value) => value.replaceAll(' ', '').length >= 3, {
+			message: VALIDATION_MESSAGES.MIN_LENGTH(FIELD_LABELS.FIRST_STEP.name, 3),
+		}),
+	business_name: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.business_name
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.FIRST_STEP.business_name
+			),
+		})
+		.trim()
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.FIRST_STEP.business_name
+			),
+		})
+		.max(255, {
+			message: VALIDATION_MESSAGES.MAX_LENGTH(
+				FIELD_LABELS.FIRST_STEP.business_name,
+				255
+			),
+		})
+		.refine((value) => value.replaceAll(' ', '').length >= 3, {
+			message: VALIDATION_MESSAGES.MIN_LENGTH(
+				FIELD_LABELS.FIRST_STEP.business_name,
+				3
+			),
+		}),
+	cnpj: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.cnpj
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.FIRST_STEP.cnpj
+			),
+		})
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(FIELD_LABELS.FIRST_STEP.cnpj),
+		})
+		.length(18, {
+			message: VALIDATION_MESSAGES.MAX_LENGTH(FIELD_LABELS.FIRST_STEP.cnpj, 18),
+		})
+		.refine((data) => cnpj.isValid(data), {
+			message: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.cnpj
+			),
+		}),
+	opening_date: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.opening_date
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.FIRST_STEP.opening_date
+			),
+		})
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.FIRST_STEP.opening_date
+			),
+		})
+		.refine(
+			(value) => {
+				const parsedDate = new Date(value)
+				return isValid(parsedDate)
+			},
+			{
+				message: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+					FIELD_LABELS.FIRST_STEP.opening_date
+				),
+			}
+		),
+	cell_phone: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.cell_phone
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.FIRST_STEP.cell_phone
+			),
+		})
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.FIRST_STEP.cell_phone
+			),
+		})
+		.refine((value) => value.replaceAll(' ', '').length === 14, {
+			message: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.cell_phone
+			),
+		}),
+	phone: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.phone
+			),
+		})
+		.refine((value) => !value || value.replaceAll(' ', '').length === 13, {
+			message: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.phone
+			),
+		})
+		.optional(),
+	email: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.email
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.FIRST_STEP.email
+			),
+		})
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.FIRST_STEP.email
+			),
+		})
+		.max(255, {
+			message: VALIDATION_MESSAGES.MAX_LENGTH(
+				FIELD_LABELS.FIRST_STEP.email,
+				255
+			),
+		})
+		.email({
+			message: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.email
+			),
+		}),
+	state_registration: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.state_registration
+			),
+		})
+		.optional(),
+	website: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.website
+			),
+		})
+		.url()
+		.optional(),
 })
+
+export const SignUpSchema = z
+	.object({
+		plan: PlanTypeSchema,
+	})
+	.merge(SignUpFirstStepSchema)
 
 export type SignUpFields = z.infer<typeof SignUpSchema>

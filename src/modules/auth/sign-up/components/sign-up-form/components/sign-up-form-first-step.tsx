@@ -10,6 +10,8 @@ import { Field } from '@/components/field'
 import { useSignUpFormContext } from '../../../contexts/sign-up-form.context'
 
 import { cnpjMask } from '@/helpers/masks'
+import { FIELD_LABELS } from '../../../constants/field-labels'
+
 import {
 	SignUpSchema,
 	type SignUpFields,
@@ -38,7 +40,9 @@ export function SignUpFormFirstStep() {
 								name="name"
 								render={({ field }) => (
 									<Field.Root>
-										<Field.Label htmlFor={field.name}>Razão Social</Field.Label>
+										<Field.Label htmlFor={field.name}>
+											{FIELD_LABELS.FIRST_STEP.name}
+										</Field.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -58,7 +62,7 @@ export function SignUpFormFirstStep() {
 								render={({ field }) => (
 									<Field.Root>
 										<Field.Label htmlFor={field.name}>
-											Nome Fantasia
+											{FIELD_LABELS.FIRST_STEP.business_name}
 										</Field.Label>
 										<FormControl>
 											<Input
@@ -78,7 +82,9 @@ export function SignUpFormFirstStep() {
 								name="cnpj"
 								render={({ field }) => (
 									<Field.Root>
-										<Field.Label htmlFor={field.name}>CNPJ</Field.Label>
+										<Field.Label htmlFor={field.name}>
+											{FIELD_LABELS.FIRST_STEP.cnpj}
+										</Field.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -99,7 +105,7 @@ export function SignUpFormFirstStep() {
 								render={({ field }) => (
 									<Field.Root>
 										<Field.Label htmlFor={field.name}>
-											Inscrição Estadual
+											{FIELD_LABELS.FIRST_STEP.state_registration}
 										</Field.Label>
 										<FormControl>
 											<Input
@@ -120,7 +126,7 @@ export function SignUpFormFirstStep() {
 								render={({ field }) => (
 									<Field.Root>
 										<Field.Label htmlFor={field.name}>
-											Data de abertura
+											{FIELD_LABELS.FIRST_STEP.opening_date}
 										</Field.Label>
 										<DatePickers.Default.Root>
 											<FormControl>
@@ -147,7 +153,9 @@ export function SignUpFormFirstStep() {
 								name="phone"
 								render={({ field }) => (
 									<Field.Root>
-										<Field.Label htmlFor={field.name}>Telefone</Field.Label>
+										<Field.Label htmlFor={field.name}>
+											{FIELD_LABELS.FIRST_STEP.phone}
+										</Field.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -167,7 +175,7 @@ export function SignUpFormFirstStep() {
 								render={({ field }) => (
 									<Field.Root>
 										<Field.Label htmlFor={field.name}>
-											Celular (Whatsapp)
+											{FIELD_LABELS.FIRST_STEP.cell_phone}
 										</Field.Label>
 										<FormControl>
 											<Input
@@ -187,7 +195,9 @@ export function SignUpFormFirstStep() {
 								name="email"
 								render={({ field }) => (
 									<Field.Root>
-										<Field.Label htmlFor={field.name}>Email</Field.Label>
+										<Field.Label htmlFor={field.name}>
+											{FIELD_LABELS.FIRST_STEP.email}
+										</Field.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -206,7 +216,9 @@ export function SignUpFormFirstStep() {
 								name="website"
 								render={({ field }) => (
 									<Field.Root>
-										<Field.Label htmlFor={field.name}>Site</Field.Label>
+										<Field.Label htmlFor={field.name}>
+											{FIELD_LABELS.FIRST_STEP.website}
+										</Field.Label>
 										<FormControl>
 											<Input
 												id={field.name}
