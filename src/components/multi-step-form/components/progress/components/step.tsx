@@ -9,21 +9,28 @@ type StepProps = {
 
 export function Step(props: StepProps) {
 	const { title, count, isCompleted, isActive } = props
+	const active = isActive || isCompleted
 	return (
-		<div className="flex items-center gap-4">
+		<div className="flex items-center flex-col gap-2 md:gap-4 md:flex-row">
 			<div
 				className={cn(
-					'flex items-center justify-center size-11 min-w-11 min-h-11 rounded-full border border-primary font-medium',
-					{
-						'bg-primary text-primary-foreground': isActive || isCompleted,
-					}
+					'flex items-center justify-center size-4 md:size-11 md:min-w-11 md:min-h-11 rounded-full border border-primary font-medium',
+					{ 'bg-primary': active }
 				)}
 			>
-				{count}
+				<span
+					className={cn('hidden md:inline-block', {
+						'text-primary-foreground': active,
+					})}
+				>
+					{count}
+				</span>
 			</div>
-			<div className="lg:flex flex-col hidden">
-				<small className="text-muted-foreground">Passo {count}</small>
-				<span className="font-medium">{title}</span>
+			<div className="flex flex-col">
+				<small className="text-muted-foreground hidden md:inline-block">
+					Passo {count}
+				</small>
+				<p className="font-medium text-xs md:text-base">{title}</p>
 			</div>
 		</div>
 	)

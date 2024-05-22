@@ -11,7 +11,12 @@ type ProgressProps = {
 export function Progress(props: ProgressProps) {
 	const { steps, step, completedSteps, className } = props
 	return (
-		<ul className={cn('flex flex-col gap-6', className)}>
+		<ul
+			className={cn(
+				'flex flex-row justify-around gap-6 lg:justify-normal lg:flex-col',
+				className
+			)}
+		>
 			{steps.map(({ title, value }, i) => (
 				<li key={value}>
 					<Step
