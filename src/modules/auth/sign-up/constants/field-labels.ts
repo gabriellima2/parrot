@@ -7,7 +7,7 @@ export const FIELD_LABELS = {
 		cell_phone: 'Celular (Whatsapp)',
 		phone: 'Telefone',
 		email: 'Email',
-		state_registration: 'Email',
-		website: 'Site',
+		state_registration: 'Inscrição Estadual',
+		website: 'URl do Site',
 	},
 }

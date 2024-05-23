@@ -7,21 +7,22 @@ import { DatePickers } from '@/components/date-pickers'
 import { Input } from '@/components/ui/input'
 import { Field } from '@/components/field'
 
-import { useSignUpFormContext } from '../../../contexts/sign-up-form.context'
+import { useSignUpFormContext } from '@/modules/auth/sign-up/contexts/sign-up-form.context'
 
-import { cnpjMask } from '@/helpers/masks'
-import { FIELD_LABELS } from '../../../constants/field-labels'
+import { initializaFirstStepFields } from '@/modules/auth/sign-up/helpers/initialize-first-step-fields'
+import { cellPhoneMask, cnpjMask, phoneMask } from '@/helpers/masks'
 
 import {
-	SignUpSchema,
-	type SignUpFields,
-} from '../../../schemas/sign-up.schema'
+	SignUpFirstStepSchema,
+	type SignUpFirstStepFields,
+} from '@/modules/auth/sign-up/schemas/sign-up.schema'
+import { FIELD_LABELS } from '@/modules/auth/sign-up/constants/field-labels'
 
 export function SignUpFormFirstStep() {
 	const { forwardStep } = useSignUpFormContext()
-	const form = useForm<SignUpFields>({
-		defaultValues: {},
-		resolver: zodResolver(SignUpSchema),
+	const form = useForm<SignUpFirstStepFields>({
+		defaultValues: initializaFirstStepFields(),
+		resolver: zodResolver(SignUpFirstStepSchema),
 	})
 	return (
 		<MultiStepForm.Root>
@@ -128,20 +129,20 @@ export function SignUpFormFirstStep() {
 										<Field.Label htmlFor={field.name}>
 											{FIELD_LABELS.FIRST_STEP.opening_date}
 										</Field.Label>
-										<DatePickers.Default.Root>
-											<FormControl>
+										<FormControl>
+											<DatePickers.Default.Root>
 												<DatePickers.Default.Trigger
 													date={field.value}
 													id={field.name}
 												/>
-											</FormControl>
-											<DatePickers.Default.Content>
-												<DatePickers.Default.Calendar
-													{...field}
-													value={field.value}
-												/>
-											</DatePickers.Default.Content>
-										</DatePickers.Default.Root>
+												<DatePickers.Default.Content>
+													<DatePickers.Default.Calendar
+														{...field}
+														value={field.value}
+													/>
+												</DatePickers.Default.Content>
+											</DatePickers.Default.Root>
+										</FormControl>
 										<Field.Message />
 									</Field.Root>
 								)}
@@ -159,6 +160,7 @@ export function SignUpFormFirstStep() {
 										<FormControl>
 											<Input
 												id={field.name}
+												mask={phoneMask}
 												placeholder="Ex: (13) 3626-7236"
 												{...field}
 											/>
@@ -180,6 +182,7 @@ export function SignUpFormFirstStep() {
 										<FormControl>
 											<Input
 												id={field.name}
+												mask={cellPhoneMask}
 												placeholder="Ex: (16) 99913-7752"
 												{...field}
 											/>

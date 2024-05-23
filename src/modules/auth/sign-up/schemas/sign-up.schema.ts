@@ -7,7 +7,7 @@ import { FIELD_LABELS } from '../constants/field-labels'
 
 import { PlanTypeSchema } from '@/schemas/plan-type'
 
-const SignUpFirstStepSchema = z.object({
+export const SignUpFirstStepSchema = z.object({
 	name: z
 		.string({
 			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
@@ -171,8 +171,12 @@ const SignUpFirstStepSchema = z.object({
 				FIELD_LABELS.FIRST_STEP.website
 			),
 		})
-		.url()
-		.optional(),
+		.optional()
+		.refine((v) => !v || z.string().url().safeParse(v).success, {
+			message: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.FIRST_STEP.website
+			),
+		}),
 })
 
 export const SignUpSchema = z
@@ -182,3 +186,4 @@ export const SignUpSchema = z
 	.merge(SignUpFirstStepSchema)
 
 export type SignUpFields = z.infer<typeof SignUpSchema>
+export type SignUpFirstStepFields = z.infer<typeof SignUpFirstStepSchema>
