@@ -19,9 +19,9 @@ import {
 import { FIELD_LABELS } from '@/modules/auth/sign-up/constants/field-labels'
 
 export function SignUpFormFirstStep() {
-	const { forwardStep } = useSignUpFormContext()
+	const { user, forwardStep } = useSignUpFormContext()
 	const form = useForm<SignUpFirstStepFields>({
-		defaultValues: initializaFirstStepFields(),
+		defaultValues: initializaFirstStepFields(user),
 		resolver: zodResolver(SignUpFirstStepSchema),
 	})
 	return (
