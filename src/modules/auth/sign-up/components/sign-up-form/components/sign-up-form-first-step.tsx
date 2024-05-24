@@ -126,22 +126,14 @@ export function SignUpFormFirstStep() {
 								name="opening_date"
 								render={({ field }) => (
 									<Field.Root>
-										<Field.Label htmlFor={field.name}>
-											{FIELD_LABELS.FIRST_STEP.opening_date}
-										</Field.Label>
 										<FormControl>
-											<DatePickers.Default.Root>
-												<DatePickers.Default.Trigger
-													date={field.value}
-													id={field.name}
-												/>
-												<DatePickers.Default.Content>
-													<DatePickers.Default.Calendar
-														{...field}
-														value={field.value}
-													/>
-												</DatePickers.Default.Content>
-											</DatePickers.Default.Root>
+											<DatePickers.CommonPreset
+												{...field}
+												toYear={new Date().getFullYear()}
+												fromYear={1900}
+												id={field.name}
+												label={FIELD_LABELS.FIRST_STEP.opening_date}
+											/>
 										</FormControl>
 										<Field.Message />
 									</Field.Root>

@@ -1,13 +1,13 @@
 import { forwardRef } from 'react'
-import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
+import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale/pt-BR'
 
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { PopoverTrigger } from '@/components/ui/popover'
 
-import { getValidDateFromISO } from '@/helpers/date'
 import { cn } from '@/helpers/cn'
+import { getValidDateFromISO } from '@/helpers/date'
 
 export type TriggerProps = ButtonProps & {
 	date?: string
@@ -17,7 +17,7 @@ export type TriggerElement = HTMLButtonElement
 
 export const Trigger = forwardRef<TriggerElement, TriggerProps>(
 	(props, ref) => {
-		const { date, children, className, placeholder, ...rest } = props
+		const { date, children, placeholder, className, ...rest } = props
 		return (
 			<PopoverTrigger asChild ref={ref}>
 				<Button

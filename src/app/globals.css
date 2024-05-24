@@ -34,13 +34,12 @@
   body {
     @apply bg-background text-foreground;
   }
-	p, span {
+	p {
 		@apply text-muted-foreground;
 	}
 	::-moz-selection {
 		@apply bg-primary text-primary-foreground;
 	}
-
 	::selection {
 		@apply bg-primary text-primary-foreground;
 	}

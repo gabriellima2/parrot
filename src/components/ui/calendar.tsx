@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 'use client'
 import * as React from 'react'
@@ -13,6 +14,7 @@ export type CalendarProps = React.ComponentProps<typeof DayPicker>
 function Calendar({
 	className,
 	classNames,
+	components,
 	showOutsideDays = true,
 	...props
 }: CalendarProps) {
@@ -48,7 +50,7 @@ function Calendar({
 				),
 				day_range_end: 'day-range-end',
 				day_selected:
-					'bg-base-primary hover:!bg-base-primary focus:!bg-base-primary',
+					'bg-primary hover:bg-primary focus:bg-primary text-primary-foreground',
 				day_outside:
 					'day-outside  opacity-50 aria-selected:bg-primary-50/50 aria-selected: aria-selected:opacity-30 dark:text-zinc-400 dark:aria-selected:bg-zinc-800/50 dark:aria-selected:text-zinc-400',
 				day_disabled: ' opacity-50 dark:text-zinc-400',
@@ -64,6 +66,7 @@ function Calendar({
 				IconRight: ({ ...props }) => (
 					<ChevronRight className="h-4 w-4" color="#ffffff" />
 				),
+				...components,
 			}}
 			{...props}
 		/>
