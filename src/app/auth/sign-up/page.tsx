@@ -9,7 +9,7 @@ import {
 import { FORM_STEPS } from '@/constants/form-steps'
 
 export const metadata: Metadata = {
-	title: 'Banana - Crie a sua conta',
+	title: 'Parrot - Crie a sua conta',
 }
 
 type PageProps = SearchParams<{ p: string; step: string }>

@@ -7,6 +7,7 @@ import { BaseLayout } from '@/layouts/base.layout'
 
 import { SignUpSteps } from '@/schemas/sign-up-steps'
 import { PlanTypes } from '@/schemas/plan-type'
+import { Logo } from '@/components/logo'
 
 type SignUpProps = {
 	plan: PlanTypes
@@ -18,8 +19,9 @@ export function SignUp(props: SignUpProps) {
 	return (
 		<SignUpFormProvider initialStep={step} plan={plan}>
 			<BaseLayout.Root>
-				<BaseLayout.Aside className="h-auto justify-around lg:justify-normal flex-row lg:flex-col lg:h-full">
+				<BaseLayout.Aside className="h-auto lg:flex lg:justify-between lg:flex-col lg:h-full">
 					<SignUpFormProgress />
+					<Logo className="hidden lg:block self-center" />
 				</BaseLayout.Aside>
 				<BaseLayout.Main>
 					<SignUpForm />
