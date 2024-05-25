@@ -1,7 +1,9 @@
 import './globals.css'
+import 'react-toastify/dist/ReactToastify.css'
 
-import type { Metadata } from 'next'
+import { type Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
+import { ToastContainer } from 'react-toastify'
 
 import { METADATA } from '@/constants/metadata'
 
@@ -38,7 +40,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={GeistSans.className}>{children}</body>
+			<body className={GeistSans.className}>
+				{children}
+				<ToastContainer />
+			</body>
 		</html>
 	)
 }
