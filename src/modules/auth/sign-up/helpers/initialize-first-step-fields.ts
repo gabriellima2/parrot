@@ -5,7 +5,7 @@ import type {
 } from '../schemas/sign-up.schema'
 
 export function initializaFirstStepFields(
-	filledFields?: SignUpFields
+	filledFields?: Partial<SignUpFields>
 ): DefaultValues<SignUpFirstStepFields> {
 	return {
 		business_name: filledFields?.business_name || '',

@@ -217,7 +217,7 @@ export function SignUpFormFirstStep() {
 										<FormControl>
 											<Input
 												id={field.name}
-												placeholder="Ex: www.empreendimentoslopes.com.br"
+												placeholder="Ex: https://empreendimentoslopes.com"
 												{...field}
 											/>
 										</FormControl>

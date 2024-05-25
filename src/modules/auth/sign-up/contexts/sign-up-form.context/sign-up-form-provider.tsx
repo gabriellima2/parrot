@@ -8,7 +8,10 @@ import { SignUpFormContext } from './sign-up-form-context'
 import { FORM_STEPS } from '@/constants/form-steps'
 import { ROUTES } from '@/constants/routes'
 
-import type { SignUpFields } from '../../schemas/sign-up.schema'
+import {
+	SignUpFirstStepSchema,
+	type SignUpFields,
+} from '../../schemas/sign-up.schema'
 import type { SignUpSteps } from '@/schemas/sign-up-steps'
 import type { PlanTypes } from '@/schemas/plan-type'
 
@@ -19,8 +22,11 @@ type SignUpFormProviderProps = PropsWithChildren & {
 
 export function SignUpFormProvider(props: SignUpFormProviderProps) {
 	const { initialStep, plan, children } = props
-	const [step, setStep] = useState<SignUpSteps>(initialStep)
 	const [user, setUser] = useState<Partial<SignUpFields>>({ plan })
+	const isCompletedFirstStep = SignUpFirstStepSchema.safeParse(user).success
+	const [step, setStep] = useState<SignUpSteps>(
+		isCompletedFirstStep ? initialStep : 'first'
+	)
 	const { replace } = useRouter()
 
 	const completedSteps = useMemo(() => {
