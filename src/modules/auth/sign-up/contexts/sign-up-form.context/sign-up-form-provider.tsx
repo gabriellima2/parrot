@@ -20,7 +20,7 @@ type SignUpFormProviderProps = PropsWithChildren & {
 export function SignUpFormProvider(props: SignUpFormProviderProps) {
 	const { initialStep, plan, children } = props
 	const [step, setStep] = useState<SignUpSteps>(initialStep)
-	const [user, setUser] = useState<SignUpFields>({ plan })
+	const [user, setUser] = useState<Partial<SignUpFields>>({ plan })
 	const { replace } = useRouter()
 
 	const completedSteps = useMemo(() => {
@@ -32,7 +32,6 @@ export function SignUpFormProvider(props: SignUpFormProviderProps) {
 
 	function forwardStep(values: Partial<SignUpFields>) {
 		if (step === FORM_STEPS.SIGN_UP.fourth.value) return
-		// eslint-disable-next-line no-unused-vars
 		const mappedSteps: { [key in SignUpSteps]?: SignUpSteps } = {
 			first: FORM_STEPS.SIGN_UP.second.value,
 			second: FORM_STEPS.SIGN_UP.third.value,
@@ -47,7 +46,6 @@ export function SignUpFormProvider(props: SignUpFormProviderProps) {
 
 	function previousStep() {
 		if (step === FORM_STEPS.SIGN_UP.first.value) return
-		// eslint-disable-next-line no-unused-vars
 		const mappedSteps: { [key in SignUpSteps]?: SignUpSteps } = {
 			second: FORM_STEPS.SIGN_UP.first.value,
 			third: FORM_STEPS.SIGN_UP.second.value,
