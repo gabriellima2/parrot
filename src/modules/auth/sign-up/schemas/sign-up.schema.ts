@@ -179,11 +179,117 @@ export const SignUpFirstStepSchema = z.object({
 		}),
 })
 
+export const SignUpSecondStepSchema = z.object({
+	zip_code: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.SECOND_STEP.zip_code
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.SECOND_STEP.zip_code
+			),
+		})
+		.trim()
+		.min(9, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.SECOND_STEP.zip_code
+			),
+		})
+		.max(9, {
+			message: VALIDATION_MESSAGES.MAX_LENGTH(
+				FIELD_LABELS.SECOND_STEP.zip_code,
+				9
+			),
+		})
+		.refine((value) => value.replaceAll(' ', '').length >= 9, {
+			message: VALIDATION_MESSAGES.LENGTH(FIELD_LABELS.SECOND_STEP.zip_code, 9),
+		}),
+	district: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.SECOND_STEP.district
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.SECOND_STEP.district
+			),
+		})
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.SECOND_STEP.district
+			),
+		}),
+	city: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.SECOND_STEP.city
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.SECOND_STEP.city
+			),
+		})
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.SECOND_STEP.city
+			),
+		}),
+	state: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.SECOND_STEP.state
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.SECOND_STEP.state
+			),
+		})
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.SECOND_STEP.state
+			),
+		}),
+	street: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.SECOND_STEP.street
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.SECOND_STEP.street
+			),
+		})
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.SECOND_STEP.street
+			),
+		}),
+	number: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.SECOND_STEP.number
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.SECOND_STEP.number
+			),
+		})
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.SECOND_STEP.number
+			),
+		}),
+	complement: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.SECOND_STEP.complement
+			),
+		})
+		.optional(),
+})
+
 export const SignUpSchema = z
 	.object({
 		plan: PlanTypeSchema,
 	})
 	.merge(SignUpFirstStepSchema)
+	.merge(SignUpSecondStepSchema)
 
 export type SignUpFields = z.infer<typeof SignUpSchema>
 export type SignUpFirstStepFields = z.infer<typeof SignUpFirstStepSchema>
+export type SignUpSecondStepFields = z.infer<typeof SignUpSecondStepSchema>

@@ -1,13 +1,187 @@
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import { Form, FormControl, FormField } from '@/components/ui/form'
 import { MultiStepForm } from '@/components/multi-step-form'
-import { useSignUpFormContext } from '../../../contexts/sign-up-form.context'
+import { Selects } from '@/components/selects'
+import { Input } from '@/components/ui/input'
+import { Field } from '@/components/field'
+
+import { useSignUpFormContext } from '@/modules/auth/sign-up/contexts/sign-up-form.context'
+
+import { initializaSecondStepFields } from '@/modules/auth/sign-up/helpers/initialize-second-step-fields'
+import { zipCodeMask } from '@/helpers/masks'
+
+import {
+	SignUpSecondStepSchema,
+	type SignUpSecondStepFields,
+} from '@/modules/auth/sign-up/schemas/sign-up.schema'
+import { FIELD_LABELS } from '@/modules/auth/sign-up/constants/field-labels'
 
 export function SignUpFormSecondStep() {
-	const { previousStep, forwardStep } = useSignUpFormContext()
+	const { user, forwardStep, previousStep } = useSignUpFormContext()
+	const form = useForm<SignUpSecondStepFields>({
+		defaultValues: initializaSecondStepFields(user),
+		resolver: zodResolver(SignUpSecondStepSchema),
+	})
 	return (
 		<MultiStepForm.Root>
-			<MultiStepForm.Title>Second</MultiStepForm.Title>
-			<MultiStepForm.PreviousStep onClick={previousStep} />
-			<MultiStepForm.ForwardStep onClick={() => forwardStep({})} />
+			<MultiStepForm.Header>
+				<MultiStepForm.Title>Endereço da Empresa</MultiStepForm.Title>
+				<MultiStepForm.Description>
+					Preencha as informações de endereço da sua empresa
+				</MultiStepForm.Description>
+			</MultiStepForm.Header>
+			<Form {...form}>
+				<form onSubmit={form.handleSubmit(forwardStep)}>
+					<MultiStepForm.Grid.Root>
+						<MultiStepForm.Grid.Item className="sm:col-span-2">
+							<FormField
+								control={form.control}
+								name="zip_code"
+								render={({ field }) => (
+									<Field.Root>
+										<Field.Label htmlFor={field.name}>
+											{FIELD_LABELS.SECOND_STEP.zip_code}
+										</Field.Label>
+										<FormControl>
+											<Input
+												id={field.name}
+												placeholder="Ex: 15703-054"
+												mask={zipCodeMask}
+												{...field}
+											/>
+										</FormControl>
+										<Field.Message />
+									</Field.Root>
+								)}
+							/>
+						</MultiStepForm.Grid.Item>
+						<MultiStepForm.Grid.Item className="sm:col-span-2">
+							<FormField
+								control={form.control}
+								name="street"
+								render={({ field }) => (
+									<Field.Root>
+										<Field.Label htmlFor={field.name}>
+											{FIELD_LABELS.SECOND_STEP.street}
+										</Field.Label>
+										<FormControl>
+											<Input
+												id={field.name}
+												placeholder="Ex: Rua João Batista de Melo"
+												{...field}
+											/>
+										</FormControl>
+										<Field.Message />
+									</Field.Root>
+								)}
+							/>
+						</MultiStepForm.Grid.Item>
+						<MultiStepForm.Grid.Item className="sm:col-span-2">
+							<FormField
+								control={form.control}
+								name="district"
+								render={({ field }) => (
+									<Field.Root>
+										<Field.Label htmlFor={field.name}>
+											{FIELD_LABELS.SECOND_STEP.district}
+										</Field.Label>
+										<FormControl>
+											<Input
+												id={field.name}
+												placeholder="Ex: Jardim América - Quarta Parte"
+												{...field}
+											/>
+										</FormControl>
+										<Field.Message />
+									</Field.Root>
+								)}
+							/>
+						</MultiStepForm.Grid.Item>
+						<MultiStepForm.Grid.Item className="sm:col-span-2">
+							<FormField
+								control={form.control}
+								name="city"
+								render={({ field }) => (
+									<Field.Root>
+										<Field.Label htmlFor={field.name}>
+											{FIELD_LABELS.SECOND_STEP.city}
+										</Field.Label>
+										<FormControl>
+											<Input
+												id={field.name}
+												placeholder="Ex: Jales"
+												{...field}
+											/>
+										</FormControl>
+										<Field.Message />
+									</Field.Root>
+								)}
+							/>
+						</MultiStepForm.Grid.Item>
+						<MultiStepForm.Grid.Item className="sm:col-span-2">
+							<FormField
+								control={form.control}
+								name="state"
+								render={({ field }) => (
+									<Field.Root>
+										<FormControl>
+											<Selects.State
+												label={FIELD_LABELS.SECOND_STEP.state}
+												{...field}
+											/>
+										</FormControl>
+										<Field.Message />
+									</Field.Root>
+								)}
+							/>
+						</MultiStepForm.Grid.Item>
+						<MultiStepForm.Grid.Item className="sm:col-span-2">
+							<FormField
+								control={form.control}
+								name="number"
+								render={({ field }) => (
+									<Field.Root>
+										<Field.Label htmlFor={field.name}>
+											{FIELD_LABELS.SECOND_STEP.number}
+										</Field.Label>
+										<FormControl>
+											<Input id={field.name} placeholder="Ex: 999" {...field} />
+										</FormControl>
+										<Field.Message />
+									</Field.Root>
+								)}
+							/>
+						</MultiStepForm.Grid.Item>
+						<MultiStepForm.Grid.Item>
+							<FormField
+								control={form.control}
+								name="complement"
+								render={({ field }) => (
+									<Field.Root>
+										<Field.Label htmlFor={field.name}>
+											{FIELD_LABELS.SECOND_STEP.complement}
+										</Field.Label>
+										<FormControl>
+											<Input
+												id={field.name}
+												placeholder="Ex: Edifício Central"
+												{...field}
+											/>
+										</FormControl>
+										<Field.Message />
+									</Field.Root>
+								)}
+							/>
+						</MultiStepForm.Grid.Item>
+					</MultiStepForm.Grid.Root>
+					<MultiStepForm.Footer>
+						<MultiStepForm.PreviousStep type="button" onClick={previousStep} />
+						<MultiStepForm.ForwardStep type="submit" />
+					</MultiStepForm.Footer>
+				</form>
+			</Form>
 		</MultiStepForm.Root>
 	)
 }

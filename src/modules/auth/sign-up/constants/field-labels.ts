@@ -10,4 +10,13 @@ export const FIELD_LABELS = {
 		state_registration: 'Inscrição Estadual',
 		website: 'URl do Site',
 	},
+	SECOND_STEP: {
+		zip_code: 'CEP',
+		district: 'Bairro',
+		city: 'Cidade',
+		state: 'Estado',
+		street: 'Logradouro',
+		number: 'Número',
+		complement: 'Complemento',
+	},
 }
