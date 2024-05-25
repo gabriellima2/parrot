@@ -30,7 +30,9 @@ export function Step(props: StepProps) {
 				<small className="text-muted-foreground hidden md:inline-block">
 					Passo {count}
 				</small>
-				<p className="font-medium text-xs md:text-base">{title}</p>
+				<p className="font-medium text-xs md:text-base text-foreground">
+					{title}
+				</p>
 			</div>
 		</div>
 	)

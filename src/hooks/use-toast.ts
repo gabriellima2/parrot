@@ -12,6 +12,7 @@ export function useToast() {
 			toastId: options?.id,
 			position: 'top-right',
 			draggable: true,
+			theme: 'dark',
 		})
 	}
 	return {

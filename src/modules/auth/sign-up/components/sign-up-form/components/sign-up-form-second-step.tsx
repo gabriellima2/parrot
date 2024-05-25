@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -8,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Field } from '@/components/field'
 
 import { useSignUpFormContext } from '@/modules/auth/sign-up/contexts/sign-up-form.context'
+import { useSearchZipCode } from '@/hooks/use-search-zip-code'
 
 import { initializaSecondStepFields } from '@/modules/auth/sign-up/helpers/initialize-second-step-fields'
 import { zipCodeMask } from '@/helpers/masks'
@@ -24,6 +26,22 @@ export function SignUpFormSecondStep() {
 		defaultValues: initializaSecondStepFields(user),
 		resolver: zodResolver(SignUpSecondStepSchema),
 	})
+	const { handleSearchZipCode, wasSuccessfulSearchingZipCode } =
+		useSearchZipCode()
+
+	const fillAddressFieldsByZipCode = useCallback(
+		async (zipCode: string) => {
+			await handleSearchZipCode(zipCode, (address) => {
+				form.setValue('street', address.logradouro)
+				form.setValue('district', address.bairro)
+				form.setValue('city', address.localidade)
+				form.setValue('state', address.uf?.toUpperCase() || '')
+				form.clearErrors(['street', 'district', 'city', 'state'])
+			})
+		},
+		[form, handleSearchZipCode]
+	)
+
 	return (
 		<MultiStepForm.Root>
 			<MultiStepForm.Header>
@@ -46,10 +64,14 @@ export function SignUpFormSecondStep() {
 										</Field.Label>
 										<FormControl>
 											<Input
+												{...field}
 												id={field.name}
 												placeholder="Ex: 15703-054"
 												mask={zipCodeMask}
-												{...field}
+												onChange={(e) => {
+													field.onChange(e)
+													fillAddressFieldsByZipCode(e.target.value)
+												}}
 											/>
 										</FormControl>
 										<Field.Message />
@@ -69,6 +91,7 @@ export function SignUpFormSecondStep() {
 										<FormControl>
 											<Input
 												id={field.name}
+												readOnly={wasSuccessfulSearchingZipCode}
 												placeholder="Ex: Rua João Batista de Melo"
 												{...field}
 											/>
@@ -90,6 +113,7 @@ export function SignUpFormSecondStep() {
 										<FormControl>
 											<Input
 												id={field.name}
+												readOnly={wasSuccessfulSearchingZipCode}
 												placeholder="Ex: Jardim América - Quarta Parte"
 												{...field}
 											/>
@@ -111,6 +135,7 @@ export function SignUpFormSecondStep() {
 										<FormControl>
 											<Input
 												id={field.name}
+												readOnly={wasSuccessfulSearchingZipCode}
 												placeholder="Ex: Jales"
 												{...field}
 											/>
@@ -128,6 +153,8 @@ export function SignUpFormSecondStep() {
 									<Field.Root>
 										<FormControl>
 											<Selects.State
+												id={field.name}
+												disabled={wasSuccessfulSearchingZipCode}
 												label={FIELD_LABELS.SECOND_STEP.state}
 												{...field}
 											/>

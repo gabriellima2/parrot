@@ -42,7 +42,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={GeistSans.className}>
 				{children}
-				<ToastContainer />
+				<ToastContainer bodyClassName={GeistSans.className} />
 			</body>
 		</html>
 	)
