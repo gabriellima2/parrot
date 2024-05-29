@@ -15,7 +15,7 @@ export function Step(props: StepProps) {
 			<div
 				className={cn(
 					'flex items-center justify-center size-4 md:size-11 md:min-w-11 md:min-h-11 rounded-full border border-primary font-medium',
-					{ 'bg-primary': active }
+					{ 'bg-primary border-b-4 border-b-black/15': active }
 				)}
 			>
 				<span
