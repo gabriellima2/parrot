@@ -283,13 +283,191 @@ export const SignUpSecondStepSchema = z.object({
 		.optional(),
 })
 
+export const SignUpThirdStepSchema = z.object({
+	username: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.THIRD_STEP.username
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.THIRD_STEP.username
+			),
+		})
+		.trim()
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.THIRD_STEP.username
+			),
+		})
+		.max(255, {
+			message: VALIDATION_MESSAGES.MAX_LENGTH(
+				FIELD_LABELS.THIRD_STEP.username,
+				255
+			),
+		})
+		.refine((value) => value.replaceAll(' ', '').length >= 3, {
+			message: VALIDATION_MESSAGES.MIN_LENGTH(
+				FIELD_LABELS.THIRD_STEP.username,
+				3
+			),
+		}),
+	cell_phone: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.THIRD_STEP.cell_phone
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.THIRD_STEP.cell_phone
+			),
+		})
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.THIRD_STEP.cell_phone
+			),
+		})
+		.refine((value) => value.replaceAll(' ', '').length === 14, {
+			message: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.THIRD_STEP.cell_phone
+			),
+		}),
+	phone: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.THIRD_STEP.phone
+			),
+		})
+		.refine((value) => !value || value.replaceAll(' ', '').length === 13, {
+			message: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.THIRD_STEP.phone
+			),
+		})
+		.optional(),
+	email: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.THIRD_STEP.email
+			),
+			required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.THIRD_STEP.email
+			),
+		})
+		.min(1, {
+			message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+				FIELD_LABELS.THIRD_STEP.email
+			),
+		})
+		.max(255, {
+			message: VALIDATION_MESSAGES.MAX_LENGTH(
+				FIELD_LABELS.THIRD_STEP.email,
+				255
+			),
+		})
+		.email({
+			message: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.THIRD_STEP.email
+			),
+		}),
+	password_group: z
+		.object({
+			password: z
+				.string({
+					invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+						FIELD_LABELS.THIRD_STEP.password_group.password
+					),
+					required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+						FIELD_LABELS.THIRD_STEP.password_group.password
+					),
+				})
+				.min(1, {
+					message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+						FIELD_LABELS.THIRD_STEP.password_group.password
+					),
+				})
+				.max(45, {
+					message: VALIDATION_MESSAGES.MAX_LENGTH(
+						FIELD_LABELS.THIRD_STEP.password_group.password,
+						45
+					),
+				})
+				.refine((value) => value.length >= 8, {
+					message: VALIDATION_MESSAGES.MIN_LENGTH(
+						FIELD_LABELS.THIRD_STEP.password_group.password,
+						8
+					),
+				}),
+			password_confirmation: z
+				.string({
+					invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+						FIELD_LABELS.THIRD_STEP.password_group.confirm_password
+					),
+					required_error: VALIDATION_MESSAGES.REQUIRED_ERROR(
+						FIELD_LABELS.THIRD_STEP.password_group.confirm_password
+					),
+				})
+				.min(1, {
+					message: VALIDATION_MESSAGES.REQUIRED_ERROR(
+						FIELD_LABELS.THIRD_STEP.password_group.confirm_password
+					),
+				})
+				.max(45, {
+					message: VALIDATION_MESSAGES.MAX_LENGTH(
+						FIELD_LABELS.THIRD_STEP.password_group.confirm_password,
+						45
+					),
+				})
+				.refine((value) => value.length >= 8, {
+					message: VALIDATION_MESSAGES.MIN_LENGTH(
+						FIELD_LABELS.THIRD_STEP.password_group.confirm_password,
+						8
+					),
+				}),
+		})
+		.refine((data) => data.password === data.password_confirmation, {
+			message: VALIDATION_MESSAGES.PASSWORD_CONFIRMATION,
+			path: ['password_confirmation'],
+		}),
+	website: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.THIRD_STEP.website
+			),
+		})
+		.optional()
+		.refine((v) => !v || z.string().url().safeParse(v).success, {
+			message: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.THIRD_STEP.website
+			),
+		}),
+	description: z
+		.string({
+			invalid_type_error: VALIDATION_MESSAGES.INVALID_TYPE_ERROR(
+				FIELD_LABELS.THIRD_STEP.description
+			),
+		})
+		.trim()
+		.max(400, {
+			message: VALIDATION_MESSAGES.MAX_LENGTH(
+				FIELD_LABELS.THIRD_STEP.description,
+				400
+			),
+		})
+		.refine((value) => !value || value.replaceAll(' ', '').length >= 3, {
+			message: VALIDATION_MESSAGES.MIN_LENGTH(
+				FIELD_LABELS.THIRD_STEP.description,
+				3
+			),
+		}),
+})
+
 export const SignUpSchema = z
 	.object({
 		plan: PlanTypeSchema,
 	})
 	.merge(SignUpFirstStepSchema)
 	.merge(SignUpSecondStepSchema)
+	.merge(SignUpThirdStepSchema)
 
 export type SignUpFields = z.infer<typeof SignUpSchema>
 export type SignUpFirstStepFields = z.infer<typeof SignUpFirstStepSchema>
 export type SignUpSecondStepFields = z.infer<typeof SignUpSecondStepSchema>
+export type SignUpThirdStepFields = z.infer<typeof SignUpThirdStepSchema>

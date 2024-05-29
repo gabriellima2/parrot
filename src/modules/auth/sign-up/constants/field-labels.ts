@@ -19,4 +19,16 @@ export const FIELD_LABELS = {
 		number: 'Número',
 		complement: 'Complemento',
 	},
+	THIRD_STEP: {
+		username: 'Nome de usuário',
+		cell_phone: 'Celular (Whatsapp)',
+		phone: 'Telefone',
+		email: 'Email',
+		password_group: {
+			password: 'Senha',
+			confirm_password: 'Confirmação de senha',
+		},
+		website: 'URl do Site',
+		description: 'Compartilhe os objetivos e valores da sua empresa',
+	},
 }

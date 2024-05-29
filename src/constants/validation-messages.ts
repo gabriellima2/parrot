@@ -11,4 +11,6 @@ export const VALIDATION_MESSAGES = {
 		`O campo ${field} deve conter no mínimo ${minLength} ${getCorrectCharText(minLength)}`,
 	LENGTH: (field: string, length: number) =>
 		`O campo ${field} deve conter ${length} ${getCorrectCharText(length)}`,
+	PASSWORD_CONFIRMATION:
+		'As senhas não coincidem. Por favor, verifique se digitou a mesma senha',
 }
