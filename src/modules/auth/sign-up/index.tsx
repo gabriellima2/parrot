@@ -18,7 +18,7 @@ export function SignUp(props: SignUpProps) {
 	const { plan, step } = props
 	return (
 		<SignUpFormProvider initialStep={step} plan={plan}>
-			<BaseLayout.Root>
+			<BaseLayout.Root className="h-auto">
 				<BaseLayout.Aside className="h-auto lg:flex lg:justify-between lg:flex-col lg:h-full">
 					<SignUpFormProgress />
 					<Logo className="hidden lg:block self-center" />

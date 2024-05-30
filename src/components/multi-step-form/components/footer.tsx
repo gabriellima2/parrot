@@ -8,7 +8,7 @@ export function Footer(props: FooterProps) {
 	return (
 		<footer
 			className={cn(
-				'w-full flex justify-end gap-4 pt-8 pb-4 flex-wrap',
+				'w-full flex justify-end gap-4 pt-8 md:pb-4 flex-wrap',
 				className
 			)}
 			{...rest}

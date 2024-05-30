@@ -8,7 +8,7 @@ export const FIELD_LABELS = {
 		phone: 'Telefone',
 		email: 'Email',
 		state_registration: 'Inscrição Estadual',
-		website: 'URl do Site',
+		website: 'URL do Site',
 	},
 	SECOND_STEP: {
 		zip_code: 'CEP',
