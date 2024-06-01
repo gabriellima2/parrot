@@ -12,13 +12,13 @@ export function SignUpFormFourthStep() {
 	return (
 		<MultiStep.Default.Root>
 			<MultiStep.Default.Header>
-				<MultiStep.Default.Title>Finalizar</MultiStep.Default.Title>
+				<MultiStep.Default.Title>Confirme os dados</MultiStep.Default.Title>
 				<MultiStep.Default.Description>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
+					Confirme os dados antes de finalizar a criação da sua conta.
 				</MultiStep.Default.Description>
 			</MultiStep.Default.Header>
-			<article className="flex flex-col gap-8">
-				<Informations.Default.Root>
+			<article className="flex flex-col gap-6">
+				<Informations.Default.Root className="bg-muted p-6 rounded-xl">
 					<Informations.Default.List>
 						<Informations.Default.ListItem
 							className="sm:col-span-2"
@@ -75,7 +75,7 @@ export function SignUpFormFourthStep() {
 						/>
 					</Informations.Default.List>
 				</Informations.Default.Root>
-				<Informations.Default.Root>
+				<Informations.Default.Root className="bg-muted p-6 rounded-xl">
 					<Informations.Default.Title>
 						Endereço da Empresa
 					</Informations.Default.Title>
