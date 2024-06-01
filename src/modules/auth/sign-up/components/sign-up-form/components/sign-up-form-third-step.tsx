@@ -2,11 +2,12 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { Form, FormControl, FormField } from '@/components/ui/form'
-import { MultiStepForm } from '@/components/multi-step-form'
-import { InputPassword } from '@/components/input-password'
+import { Fields } from '@/components/boilerplate/fields'
+import { MultiStep } from '@/components/form/multi-step'
+import { Grids } from '@/components/boilerplate/grids'
 import { Textarea } from '@/components/ui/textarea'
+import { Inputs } from '@/components/form/inputs'
 import { Input } from '@/components/ui/input'
-import { Field } from '@/components/field'
 
 import { useSignUpFormContext } from '@/modules/auth/sign-up/contexts/sign-up-form.context'
 
@@ -26,26 +27,26 @@ export function SignUpFormThirdStep() {
 		resolver: zodResolver(SignUpThirdStepSchema),
 	})
 	return (
-		<MultiStepForm.Root>
-			<MultiStepForm.Header>
-				<MultiStepForm.Title>Dados do perfil</MultiStepForm.Title>
-				<MultiStepForm.Description>
+		<MultiStep.Default.Root>
+			<MultiStep.Default.Header>
+				<MultiStep.Default.Title>Dados do perfil</MultiStep.Default.Title>
+				<MultiStep.Default.Description>
 					Mostre sua essência! Configure o perfil da empresa para refletir seus
 					valores e objetivos.
-				</MultiStepForm.Description>
-			</MultiStepForm.Header>
+				</MultiStep.Default.Description>
+			</MultiStep.Default.Header>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(forwardStep)}>
-					<MultiStepForm.Grid.Root>
-						<MultiStepForm.Grid.Item className="sm:col-span-2">
+					<Grids.Default.Root>
+						<Grids.Default.Item className="sm:col-span-2">
 							<FormField
 								control={form.control}
 								name="username"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.THIRD_STEP.username}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -53,20 +54,20 @@ export function SignUpFormThirdStep() {
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="sm:col-span-2">
+						</Grids.Default.Item>
+						<Grids.Default.Item className="sm:col-span-2">
 							<FormField
 								control={form.control}
 								name="email"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.THIRD_STEP.email}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -75,62 +76,62 @@ export function SignUpFormThirdStep() {
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="sm:col-span-2">
+						</Grids.Default.Item>
+						<Grids.Default.Item className="sm:col-span-2">
 							<FormField
 								control={form.control}
 								name="password_group.password"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.THIRD_STEP.password_group.password}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
-											<InputPassword
+											<Inputs.Password
 												id={field.name}
 												placeholder="Digite uma senha"
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="sm:col-span-2">
+						</Grids.Default.Item>
+						<Grids.Default.Item className="sm:col-span-2">
 							<FormField
 								control={form.control}
 								name="password_group.password_confirmation"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.THIRD_STEP.password_group.confirm_password}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
-											<InputPassword
+											<Inputs.Password
 												id={field.name}
 												placeholder="Digite a senha novamente"
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="sm:col-span-2 lg:col-span-1">
+						</Grids.Default.Item>
+						<Grids.Default.Item className="sm:col-span-2 lg:col-span-1">
 							<FormField
 								control={form.control}
 								name="phone"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.THIRD_STEP.phone}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -140,20 +141,20 @@ export function SignUpFormThirdStep() {
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="sm:col-span-2 lg:col-span-1">
+						</Grids.Default.Item>
+						<Grids.Default.Item className="sm:col-span-2 lg:col-span-1">
 							<FormField
 								control={form.control}
 								name="cell_phone"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.THIRD_STEP.cell_phone}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -163,20 +164,20 @@ export function SignUpFormThirdStep() {
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="lg:col-span-2">
+						</Grids.Default.Item>
+						<Grids.Default.Item className="lg:col-span-2">
 							<FormField
 								control={form.control}
 								name="website"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.THIRD_STEP.website}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -185,20 +186,20 @@ export function SignUpFormThirdStep() {
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item>
+						</Grids.Default.Item>
+						<Grids.Default.Item>
 							<FormField
 								control={form.control}
 								name="description"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.THIRD_STEP.description} (opcional)
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
 											<Textarea
 												id={field.name}
@@ -206,18 +207,21 @@ export function SignUpFormThirdStep() {
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-					</MultiStepForm.Grid.Root>
-					<MultiStepForm.Footer>
-						<MultiStepForm.PreviousStep type="button" onClick={previousStep} />
-						<MultiStepForm.ForwardStep type="submit" />
-					</MultiStepForm.Footer>
+						</Grids.Default.Item>
+					</Grids.Default.Root>
+					<MultiStep.Default.Footer>
+						<MultiStep.Default.PreviousStep
+							type="button"
+							onClick={previousStep}
+						/>
+						<MultiStep.Default.ForwardStep type="submit" />
+					</MultiStep.Default.Footer>
 				</form>
 			</Form>
-		</MultiStepForm.Root>
+		</MultiStep.Default.Root>
 	)
 }

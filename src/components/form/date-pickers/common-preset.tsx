@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 
 import { CalendarProps } from './default/components/calendar'
-import { Field } from '@/components/field'
+import { Fields } from '@/components/boilerplate/fields'
 import { DatePickers } from '.'
 
 export type CommonPresetProps = CalendarProps & {
@@ -15,7 +15,9 @@ const CommonPreset = forwardRef<HTMLButtonElement, CommonPresetProps>(
 		const { value, id, label, placeholder, ...rest } = props
 		return (
 			<>
-				{label && <Field.Label htmlFor={id}>{label}</Field.Label>}
+				{label && (
+					<Fields.Default.Label htmlFor={id}>{label}</Fields.Default.Label>
+				)}
 				<DatePickers.WithPreset.Root>
 					<DatePickers.WithPreset.Trigger
 						date={value}

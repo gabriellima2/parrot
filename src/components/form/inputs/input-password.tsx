@@ -2,7 +2,7 @@
 import { forwardRef, useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
 
-import { Input, type InputProps } from './ui/input'
+import { Input, type InputProps } from '@/components/ui/input'
 import { cn } from '@/helpers/cn'
 
 export type InputPasswordProps = Omit<InputProps, 'type'> & {

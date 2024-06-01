@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 
 import { cn } from '@/helpers/cn'
-import { Label } from '../ui/label'
+import { Label } from '@/components/ui/label'
 import {
 	Select,
 	SelectContent,
@@ -9,7 +9,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 	SelectProps,
-} from '../ui/select'
+} from '@/components/ui/select'
 
 export type CommonProps = Omit<SelectProps, 'onValueChange'> & {
 	id?: string

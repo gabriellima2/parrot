@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {
 	Calendar as BaseCalendar,
 	type CalendarProps as BaseCalendarProps,

@@ -3,10 +3,11 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { Form, FormControl, FormField } from '@/components/ui/form'
-import { MultiStepForm } from '@/components/multi-step-form'
-import { Selects } from '@/components/selects'
+import { Fields } from '@/components/boilerplate/fields'
+import { MultiStep } from '@/components/form/multi-step'
+import { Grids } from '@/components/boilerplate/grids'
+import { Selects } from '@/components/form/selects'
 import { Input } from '@/components/ui/input'
-import { Field } from '@/components/field'
 
 import { useSignUpFormContext } from '@/modules/auth/sign-up/contexts/sign-up-form.context'
 import { useSearchZipCode } from '@/hooks/use-search-zip-code'
@@ -43,25 +44,25 @@ export function SignUpFormSecondStep() {
 	)
 
 	return (
-		<MultiStepForm.Root>
-			<MultiStepForm.Header>
-				<MultiStepForm.Title>Endereço da Empresa</MultiStepForm.Title>
-				<MultiStepForm.Description>
+		<MultiStep.Default.Root>
+			<MultiStep.Default.Header>
+				<MultiStep.Default.Title>Endereço da Empresa</MultiStep.Default.Title>
+				<MultiStep.Default.Description>
 					Preencha as informações de endereço da sua empresa
-				</MultiStepForm.Description>
-			</MultiStepForm.Header>
+				</MultiStep.Default.Description>
+			</MultiStep.Default.Header>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(forwardStep)}>
-					<MultiStepForm.Grid.Root>
-						<MultiStepForm.Grid.Item className="sm:col-span-2">
+					<Grids.Default.Root>
+						<Grids.Default.Item className="sm:col-span-2">
 							<FormField
 								control={form.control}
 								name="zip_code"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.SECOND_STEP.zip_code}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
 											<Input
 												{...field}
@@ -74,20 +75,20 @@ export function SignUpFormSecondStep() {
 												}}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="sm:col-span-2">
+						</Grids.Default.Item>
+						<Grids.Default.Item className="sm:col-span-2">
 							<FormField
 								control={form.control}
 								name="street"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.SECOND_STEP.street}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -96,20 +97,20 @@ export function SignUpFormSecondStep() {
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="sm:col-span-2">
+						</Grids.Default.Item>
+						<Grids.Default.Item className="sm:col-span-2">
 							<FormField
 								control={form.control}
 								name="district"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.SECOND_STEP.district}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -118,20 +119,20 @@ export function SignUpFormSecondStep() {
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="sm:col-span-2">
+						</Grids.Default.Item>
+						<Grids.Default.Item className="sm:col-span-2">
 							<FormField
 								control={form.control}
 								name="city"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.SECOND_STEP.city}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -140,17 +141,17 @@ export function SignUpFormSecondStep() {
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="sm:col-span-2">
+						</Grids.Default.Item>
+						<Grids.Default.Item className="sm:col-span-2">
 							<FormField
 								control={form.control}
 								name="state"
 								render={({ field }) => (
-									<Field.Root>
+									<Fields.Default.Root>
 										<FormControl>
 											<Selects.State
 												id={field.name}
@@ -159,37 +160,37 @@ export function SignUpFormSecondStep() {
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item className="sm:col-span-2">
+						</Grids.Default.Item>
+						<Grids.Default.Item className="sm:col-span-2">
 							<FormField
 								control={form.control}
 								name="number"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.SECOND_STEP.number}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
 											<Input id={field.name} placeholder="Ex: 999" {...field} />
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-						<MultiStepForm.Grid.Item>
+						</Grids.Default.Item>
+						<Grids.Default.Item>
 							<FormField
 								control={form.control}
 								name="complement"
 								render={({ field }) => (
-									<Field.Root>
-										<Field.Label htmlFor={field.name}>
+									<Fields.Default.Root>
+										<Fields.Default.Label htmlFor={field.name}>
 											{FIELD_LABELS.SECOND_STEP.complement}
-										</Field.Label>
+										</Fields.Default.Label>
 										<FormControl>
 											<Input
 												id={field.name}
@@ -197,18 +198,21 @@ export function SignUpFormSecondStep() {
 												{...field}
 											/>
 										</FormControl>
-										<Field.Message />
-									</Field.Root>
+										<Fields.Default.Message />
+									</Fields.Default.Root>
 								)}
 							/>
-						</MultiStepForm.Grid.Item>
-					</MultiStepForm.Grid.Root>
-					<MultiStepForm.Footer>
-						<MultiStepForm.PreviousStep type="button" onClick={previousStep} />
-						<MultiStepForm.ForwardStep type="submit" />
-					</MultiStepForm.Footer>
+						</Grids.Default.Item>
+					</Grids.Default.Root>
+					<MultiStep.Default.Footer>
+						<MultiStep.Default.PreviousStep
+							type="button"
+							onClick={previousStep}
+						/>
+						<MultiStep.Default.ForwardStep type="submit" />
+					</MultiStep.Default.Footer>
 				</form>
 			</Form>
-		</MultiStepForm.Root>
+		</MultiStep.Default.Root>
 	)
 }

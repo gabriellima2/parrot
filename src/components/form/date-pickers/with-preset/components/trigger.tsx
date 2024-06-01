@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
-import { CalendarIcon } from 'lucide-react'
 import { format } from 'date-fns'
+import { CalendarIcon } from 'lucide-react'
 import { ptBR } from 'date-fns/locale/pt-BR'
 
 import { Button, type ButtonProps } from '@/components/ui/button'

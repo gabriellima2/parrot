@@ -1,4 +1,4 @@
-import { Step } from './components/step'
+import { ProgressStep } from './progress-step'
 import { cn } from '@/helpers/cn'
 
 type ProgressProps = {
@@ -19,7 +19,7 @@ export function Progress(props: ProgressProps) {
 		>
 			{steps.map(({ title, value }, i) => (
 				<li key={value}>
-					<Step
+					<ProgressStep
 						count={++i}
 						title={title}
 						isActive={value === step}

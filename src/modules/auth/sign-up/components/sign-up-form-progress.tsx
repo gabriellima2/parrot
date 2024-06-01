@@ -1,4 +1,4 @@
-import { MultiStepForm } from '@/components/multi-step-form'
+import { MultiStep } from '@/components/form/multi-step'
 
 import { useSignUpFormContext } from '../contexts/sign-up-form.context'
 
@@ -13,7 +13,7 @@ export function SignUpFormProgress(props: SignUpFormProgressProps) {
 	const { className } = props
 	const { step, completedSteps } = useSignUpFormContext()
 	return (
-		<MultiStepForm.Progress
+		<MultiStep.Default.Progress
 			step={step}
 			steps={Object.values(FORM_STEPS.SIGN_UP)}
 			completedSteps={completedSteps}

@@ -1,13 +1,13 @@
 import { cn } from '@/helpers/cn'
 
-type StepProps = {
+type ProgressStepProps = {
 	count: number
 	title: string
 	isCompleted?: boolean
 	isActive?: boolean
 }
 
-export function Step(props: StepProps) {
+export function ProgressStep(props: ProgressStepProps) {
 	const { title, count, isCompleted, isActive } = props
 	const active = isActive || isCompleted
 	return (

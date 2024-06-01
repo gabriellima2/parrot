@@ -3,7 +3,7 @@ import { List } from './components/list'
 import { Title } from './components/title'
 import { ListItem } from './components/list-item'
 
-export const Informations = {
+export const Default = {
 	Root,
 	Title,
 	List,
